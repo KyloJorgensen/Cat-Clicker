@@ -1,3 +1,26 @@
+.container {
+	width: 1200px;
+	margin: 0 auto;
+	background-color: yellow;
+}
+
+
+#displayedCat {
+	width: 80%;
+	background-color: blue;
+}
+
+#listOfCatsNames {
+	width: 10%;
+	background-color: red;
+	float: right;
+}
+
+#displayedCat,
+#listOfCatsNames {
+	display: inline-block;
+}
+
 img {
 	height: 300px;
 }
