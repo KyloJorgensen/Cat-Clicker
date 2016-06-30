@@ -1,68 +1,66 @@
 $(document).ready(function() {
 	'use strict';
-	var listOfCats = {};
-
-	var Cat = function(catName, catPic, catURL) {
-		this.numCatClicks = 0;
-		this.catName = catName;
-		$('#catNames').append('<li><p>' + catName + '</p></li>');
-		this.catPic = catPic;
-		this.catURL = catURL;
-		listOfCats[this.catName] = this;
+	var Model = function() {
+		this.listOfCats = [
+			{ numCatClicks: 0, catName: 'socks', catPic: "imgs/socks.jpg", catURL: "https://www.flickr.com/photos/poplinre/625069434/in/photostream/"},
+			{ numCatClicks: 0, catName: 'chewie', catPic: "imgs/chewie.jpg", catURL: "https://www.flickr.com/photos/chewie/2290467335"},
+			{ numCatClicks: 0, catName: 'jetske', catPic: "imgs/jetske.jpg", catURL: "none"},
+			{ numCatClicks: 0, catName: 'larry', catPic: "imgs/larry.jpeg", catURL: "none"},
+			{ numCatClicks: 0, catName: 'lussy', catPic: "imgs/lussy.jpeg", catURL: "none"},
+			{ numCatClicks: 0, catName: 'cowboy', catPic: "imgs/cowboy.jpg", catURL: "none"}
+		];
+		this.currentCat = 0;
 	};
 
-	Cat.prototype.clickCatImg = function(first_argument) {
-		this.numCatClicks++
-		$('#displayedCat').children('#numCatClicks').text(this.numCatClicks);
-	};
-
-	Cat.prototype.clickCatName = function() {
-		$('#displayedCat').empty().append(
-			'<p id="numCatClicks">' + this.numCatClicks + '</p>'+
-		    '<p id="catName">' + this.catName + '</p>'+
-		    '<img src="' + this.catPic + '" alt="' + this.catURL + '">'
-	    );
-	};
-
-	$('#displayedCat').on('click', 'img', function() {
-		clickCatImg($(this).parent().children('#catName').html());
-	});
-
-	$('#catNames').on('click', 'p', function(){
-		clickCatName($(this).html());
-	});
-
-	function clickCatName(catName) {
-		$.each(listOfCats, function(key, value){
-			if (key == catName) {
-				value.clickCatName();
+	var Veiw = function() {
+		this.addCats = function(cats) {
+			for (var i = 0; i < cats.length; i++) {
+				$('#catNames').append('<li><p>' + cats[i].catName + '</p></li>');
 			}
+		};
+
+		$('#catNames').on('click', 'p', function(){
+			controller.clickCatName($(this).html());
 		});
+
+		$('#displayedCat').on('click', 'img', function() {
+			controller.clickCatImg($(this).parent().children('#catName').html());
+		});
+
+		this.numCatClicks = function(numCatClicks) {
+			$('#displayedCat').children('#numCatClicks').text(numCatClicks);
+		};
+
+		this.generateCat = function(cat) {
+			$('#displayedCat').empty().append(
+				'<p id="numCatClicks">' + cat.numCatClicks + '</p>'+
+			    '<p id="catName">' + cat.catName + '</p>'+
+			    '<img src="' + cat.catPic + '" alt="' + cat.catURL + '">'
+		    );
+		};
+
 	};
 
-	function clickCatImg(catName) {
-		$.each(listOfCats, function(key, value){
-			if (key == catName) {
-				value.clickCatImg();
+	var Controller = function() {
+		var model = new Model();
+		var veiw = new Veiw();
+		veiw.addCats(model.listOfCats);
+		veiw.generateCat(model.listOfCats[model.currentCat]);
+
+		this.clickCatName = function(catName) {
+			for (var i = 0; i < model.listOfCats.length; i++) {
+				if (model.listOfCats[i].catName == catName) {
+					veiw.generateCat(model.listOfCats[i]);
+					model.currentCat = i;
+				}
 			}
-		});
-	}
+		};
 
-	var socks = new Cat('socks', "imgs/socks.jpg", "https://www.flickr.com/photos/poplinre/625069434/in/photostream/");
-	var chewie = new Cat('chewie', "imgs/chewie.jpg", "https://www.flickr.com/photos/chewie/2290467335");
-	var jetske = new Cat('jetske', "imgs/jetske.jpg", "none");
-	var larry = new Cat('larry', "imgs/larry.jpeg", "none");
-	var lussy = new Cat('lussy', "imgs/lussy.jpeg", "none");
+		this.clickCatImg = function(catName) {
+			model.listOfCats[model.currentCat].numCatClicks++;
+			veiw.numCatClicks(model.listOfCats[model.currentCat].numCatClicks)
+		}
+	};
 
-
-
-
-
-
-
-
-
-
-
-
+	var controller = new Controller();
 });
