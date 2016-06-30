@@ -4,7 +4,6 @@
 	background-color: yellow;
 }
 
-
 #displayedCat {
 	width: 80%;
 	background-color: blue;
@@ -28,3 +27,30 @@ img {
 	display: inline-block;
 	width: 45%;
 }
+#admin-button {
+	display: block;
+	color: black;
+}
+
+#admin-button,
+#admin-cancel,
+#admin-submit {
+}
+
+
+
+#admin-area{
+	display: none;
+}
+
+#admin-catName,
+#admin-URL,
+#admin-numCatClicks {
+	display: block;
+}
+
+#admin-cancel,
+#admin-submit {
+
+}
+
