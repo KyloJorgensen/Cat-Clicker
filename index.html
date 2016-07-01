@@ -8,15 +8,16 @@
 <body>
 	<div class="container">	
 		<div id="displayedCat">
-			<p id="numCatClicks" data-bind="text: numCatClicks"></p>
-			<p id="catName" data-bind="text: catName"></p>
-			<p id="catLevel" data-bind="text: catLevel"></p>
-			<img src="" alt="" class="catPic" data-bind="click: incrementCounter, attr: {src: catURL, alt: catURL}">
+			<p id="numCatClicks" data-bind="text: currentCat().numCatClicks"></p>
+			<p id="catName" data-bind="text: currentCat().catName"></p>
+			<p id="catLevel" data-bind="text: currentCat().catLevel"></p>
+			<img src="" alt="" class="catPic" data-bind="click: incrementCounter, attr: {src: currentCat().catURL, alt: currentCat().catURL}">
 		</div>
 		<div id="listOfCatsNames">
 			<ul id="catNames"></ul>
 		</div>
-		<ul data-bind="foreach: nickname">
+		<h1>Nicknames: </h1>
+		<ul data-bind="foreach: currentCat().nickname">
 			<li>
 				<p data-bind="text: name"></p>
 			</li>

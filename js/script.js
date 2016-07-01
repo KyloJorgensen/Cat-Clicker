@@ -1,24 +1,34 @@
 $(document).ready(function() {
 	'use strict';
-	var VeiwModel = function() {
+
+	var Cat = function() {
 		this.numCatClicks = ko.observable(0);
 		this.catName = ko.observable('socks');
-		this.catLevel = ko.observable('New Born');
 		this.catURL = ko.observable('https://lh3.ggpht.com/cesD31eroFxIZ4IEeXPAJkx_8i5-haU3P9LQosGNfV-GfAPUh2bE4iw4zV6Mc9XobWOR70BQh2JAP57wZlM=s0#w=640&h=480'); 
+		this.nickname = ko.observableArray([
+       		{ name: 'Bert' },
+       		{ name: 'Charles' },
+    	    { name: 'Denise' }
+    	]);	
+    	this.catLevel = ko.computed(function() {
+    		var title = 'Newborn';
+    		var number = this.numCatClicks();
+			number >= 10 ? title = 'kitty' : '',
+			number >= 20 ? title = 'Teen' : '',
+			number >= 30 ? title = 'Adult' : '',
+			number >= 40 ? title = 'Senior Cat' : '',
+			number >= 50 ? title = 'Ancient of Days' : '';
+			return title;
+    	}, this);
+	};
+
+	var VeiwModel = function() {
+		this.currentCat = ko.observable(new Cat());
 
 		this.incrementCounter = function() {
-			this.numCatClicks(this.numCatClicks() + 1);
-			this.numCatClicks() >= 10 ? this.catLevel('kitty') : '',
-			this.numCatClicks() >= 20 ? this.catLevel('Teen') : '',
-			this.numCatClicks() >= 30 ? this.catLevel('Adult') : '',
-			this.numCatClicks() >= 40 ? this.catLevel('Senior Cat') : '',
-			this.numCatClicks() >= 50 ? this.catLevel('Ancient of Days') : '';
+			this.currentCat().numCatClicks(this.currentCat().numCatClicks() + 1);
 		};
-		this.nickname = ko.observableArray([
-        { name: 'Bert' },
-        { name: 'Charles' },
-        { name: 'Denise' }
-    ]);
+
 
 	};
 
