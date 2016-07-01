@@ -16,6 +16,11 @@
 		<div id="listOfCatsNames">
 			<ul id="catNames"></ul>
 		</div>
+		<ul data-bind="foreach: nickname">
+			<li>
+				<p data-bind="text: name"></p>
+			</li>
+		</ul>
 		<button id="admin-button">Admin</button>
 		<form id="admin-area">
 			<p>Cat's Name:</p>

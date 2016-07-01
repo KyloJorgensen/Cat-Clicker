@@ -14,6 +14,11 @@ $(document).ready(function() {
 			this.numCatClicks() >= 40 ? this.catLevel('Senior Cat') : '',
 			this.numCatClicks() >= 50 ? this.catLevel('Ancient of Days') : '';
 		};
+		this.nickname = ko.observableArray([
+        { name: 'Bert' },
+        { name: 'Charles' },
+        { name: 'Denise' }
+    ]);
 
 	};
 
