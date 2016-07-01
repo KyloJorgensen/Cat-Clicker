@@ -23,10 +23,12 @@
 img {
 	height: 300px;
 }
+
 .catPic {
 	display: inline-block;
 	width: 45%;
 }
+
 #admin-button {
 	display: block;
 	color: black;

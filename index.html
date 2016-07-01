@@ -8,7 +8,10 @@
 <body>
 	<div class="container">	
 		<div id="displayedCat">
-			<p>hello</p>
+			<p id="numCatClicks" data-bind="text: numCatClicks"></p>
+			<p id="catName" data-bind="text: catName"></p>
+			<p id="catLevel" data-bind="text: catLevel"></p>
+			<img src="" alt="" class="catPic" data-bind="click: incrementCounter, attr: {src: catURL, alt: catURL}">
 		</div>
 		<div id="listOfCatsNames">
 			<ul id="catNames"></ul>
@@ -25,7 +28,7 @@
 			<input id="admin-submit" type="submit" value="Save">
 		</form>
 	</div>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-debug.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.js"></script>
 	<script src="js/script.js"></script>
 </body>

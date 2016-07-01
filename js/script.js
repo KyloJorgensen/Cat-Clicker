@@ -1,5 +1,29 @@
 $(document).ready(function() {
 	'use strict';
+	var VeiwModel = function() {
+		this.numCatClicks = ko.observable(0);
+		this.catName = ko.observable('socks');
+		this.catLevel = ko.observable('New Born');
+		this.catURL = ko.observable('https://lh3.ggpht.com/cesD31eroFxIZ4IEeXPAJkx_8i5-haU3P9LQosGNfV-GfAPUh2bE4iw4zV6Mc9XobWOR70BQh2JAP57wZlM=s0#w=640&h=480'); 
+
+		this.incrementCounter = function() {
+			this.numCatClicks(this.numCatClicks() + 1);
+			this.numCatClicks() >= 10 ? this.catLevel('kitty') : '',
+			this.numCatClicks() >= 20 ? this.catLevel('Teen') : '',
+			this.numCatClicks() >= 30 ? this.catLevel('Adult') : '',
+			this.numCatClicks() >= 40 ? this.catLevel('Senior Cat') : '',
+			this.numCatClicks() >= 50 ? this.catLevel('Ancient of Days') : '';
+		};
+
+	};
+
+	ko.applyBindings(new VeiwModel());
+
+
+
+
+
+
 	var model = {
 		listOfCats: [
 			{ numCatClicks: 0, catName: 'socks', catURL: "https://lh3.ggpht.com/cesD31eroFxIZ4IEeXPAJkx_8i5-haU3P9LQosGNfV-GfAPUh2bE4iw4zV6Mc9XobWOR70BQh2JAP57wZlM=s0#w=640&h=480"},
@@ -98,5 +122,5 @@ $(document).ready(function() {
 		}
 	};
 
-	controller.init();
+	// controller.init();
 });
