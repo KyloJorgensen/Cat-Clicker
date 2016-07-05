@@ -7,21 +7,29 @@
 </head>
 <body>
 	<div class="container">	
-		<div id="displayedCat">
-			<p id="numCatClicks" data-bind="text: currentCat().numCatClicks"></p>
-			<p id="catName" data-bind="text: currentCat().catName"></p>
-			<p id="catLevel" data-bind="text: currentCat().catLevel"></p>
-			<img src="" alt="" class="catPic" data-bind="click: incrementCounter, attr: {src: currentCat().catURL, alt: currentCat().catURL}">
+
+		<div id="listOfCatsNames" >
+			<ul id="catNames" data-bind="foreach: catList">
+				<li>
+					<p data-bind="text: catName, click: $parent.setCat"></p>
+				</li>
+			</ul>
 		</div>
-		<div id="listOfCatsNames">
-			<ul id="catNames"></ul>
+
+		<div id="displayedCat" data-bind="with: currentCat">
+			<p id="numCatClicks" data-bind="text: numCatClicks"></p>
+			<p id="catName" data-bind="text: catName"></p>
+			<p id="catLevel" data-bind="text: catLevel"></p>
+			<img src="" alt="" class="catPic" data-bind="click: $parent.incrementCounter, attr: {src: catURL, alt: catURL}">
+			<h1>Nicknames: </h1>
+			<ul data-bind="foreach: nickname">
+				<li>
+					<p data-bind="text: $data"></p>
+				</li>
+			</ul>
 		</div>
-		<h1>Nicknames: </h1>
-		<ul data-bind="foreach: currentCat().nickname">
-			<li>
-				<p data-bind="text: name"></p>
-			</li>
-		</ul>
+
+
 		<button id="admin-button">Admin</button>
 		<form id="admin-area">
 			<p>Cat's Name:</p>
